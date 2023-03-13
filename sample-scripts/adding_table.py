@@ -1,11 +1,15 @@
+import os
 from google.cloud import bigquery
 from dotenv import load_dotenv
 
 load_dotenv()
 client = bigquery.Client()
 
+project_name = os.environ.get('PROJECT_NAME')
+dataset_name = os.environ.get('DATASET_NAME')
 table_name = 'dora'
-table_id = "xenon-momentum-363005.mydev.xxxtable"
+
+table_id = f"{project_name}.{dataset_name}.{table_name}"
 
 schema = [
     bigquery.SchemaField("full_name", "STRING", mode="REQUIRED"),

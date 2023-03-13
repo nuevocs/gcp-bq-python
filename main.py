@@ -1,10 +1,16 @@
+import os
+
 from google.cloud import bigquery
 from dotenv import load_dotenv
 load_dotenv()
 client = bigquery.Client()
 
+project_name = os.environ.get('PROJECT_NAME')
+dataset_name = os.environ.get('DATASET_NAME')
+
+
 QUERY = (
-    'SELECT * FROM `xenon-momentum-363005.mydev.laptopprice` LIMIT 10'
+    f'SELECT * FROM `{project_name}.{dataset_name}.laptopprice` LIMIT 10'
 )
 query_job = client.query(QUERY)
 rows = query_job.result()
